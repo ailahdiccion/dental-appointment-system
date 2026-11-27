@@ -1,0 +1,13 @@
+build/
+dist/
+node_modules/
+nbproject/private/
+*.class
+*.war
+*.log
+.env
+.env.*
+!.env.example
+web/WEB-INF/lib/*.jar
+web/WEB-INF/web.xml
+.DS_Store

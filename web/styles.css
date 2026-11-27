@@ -1,0 +1,536 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* --- COLOR PALETTE (Sage & Slate) --- */
+    --primary-slate: #088F8F;   /* Dark Slate */
+    --accent-sage:   #97c7c6;   /* Sage Green */
+    --accent-teal:   #6cb0af;   /* Muted Teal */
+    --bg-mint:       #f4f9f6;   /* Pale Mint */
+    --white:         #ffffff;
+    
+    /* Gradients */
+    --btn-gradient: linear-gradient(135deg, #088F8F 0%, #6cb0af 100%);
+    
+    /* Text Colors */
+    --text-main:     #2f3e46;
+    --text-muted:    #6c757d;
+    
+    /* Spacing & Effects */
+    --radius: 12px;
+    --card-shadow: 0 10px 40px rgba(70, 99, 98, 0.08);
+}
+
+/* CRITICAL FIX: This stops layout breaking/scrollbars */
+* {
+    box-sizing: border-box; 
+}
+
+body.hero-bg {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-mint);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    
+    /* CRITICAL FIX: Hides horizontal scrollbar */
+    overflow-x: hidden; 
+}
+
+body.general-bg {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    
+    /* DEFAULT BACKGROUND (For Dashboard, Login, etc.) */
+    background-color: var(--bg-mint); /* Fallback color */
+    background-image: url('images/general-bg.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed; /* Keeps bg still while scrolling */
+    background-size: cover; /* Stretches to fit screen */
+    
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    
+    /* CRITICAL FIX: Hides horizontal scrollbar */
+    overflow-x: hidden; 
+}
+
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-mint); }
+::-webkit-scrollbar-thumb { background: var(--accent-sage); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary-slate); }
+
+
+/* =========================================
+   2. HEADER (Minimalist & Airy)
+   ========================================= */
+.main-header {
+    background-color: var(--white);
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Top border */
+    /* border-top: 6px solid var(--accent-sage); */
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.main-header h1 {
+    font-size: 1.6rem;
+    color: var(--primary-slate);
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.team-info {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: right;
+    font-weight: 500;
+    background: #f0f4f1;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.main-header nav a {
+    color: var(--primary-slate);
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 30px;
+    position: relative;
+    font-size: 0.95rem;
+    
+    /* NEW: Ensures the Icon and Text are perfectly aligned */
+    display: inline-flex; 
+    align-items: center;
+    gap: 5px; /* Space between house and text */
+}
+
+.main-header nav a::before {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 0%;
+    height: 8px;
+    background-color: rgba(143, 172, 149, 0.4);
+    z-index: -1;
+    transition: width 0.3s;
+}
+
+.main-header nav a:hover::before {
+    width: 100%;
+}
+
+
+/* =========================================
+   3. HOME PAGE (Visual Hierarchy)
+   ========================================= */
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.home-page h1 {
+    font-size: 3.5rem;
+    margin-top: 80px;
+    margin-bottom: 10px;
+    line-height: 1.1;
+    color: var(--primary-slate);
+}
+
+.home-page p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 650px;
+    margin-bottom: 50px;
+}
+
+.home-page .cta-wrapper {
+    order: 2;
+    margin-bottom: 80px;
+}
+
+.btn-main-cta {
+    background: var(--btn-gradient);
+    color: var(--white);
+    padding: 20px 60px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 15px 30px rgba(70, 99, 98, 0.25);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-main-cta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(70, 99, 98, 0.35);
+}
+
+.home-page::before {
+    content: '';
+    position: absolute;
+    
+    /* Position: Start at the top of the container */
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    /* Height: Stop before "Our Treatments" */
+    height: 700px; 
+    
+    /* TWO LAYERS: 
+       1. Your Image (hero-bg.jpg)
+       2. The Original Gradient Bubble (kept as requested) 
+    */
+    background: 
+        url('images/hero-bg.png') no-repeat center top,
+        radial-gradient(circle, #e3ebe6 0%, rgba(255,255,255,0) 70%);
+        
+    background-size: cover, auto; /* Cover for image, default for gradient */
+    
+    /* Opacity: Lowers the image intensity so text stays readable */
+    opacity: 0.4; 
+    
+    z-index: -1;
+    pointer-events: none;
+    
+    /* FADE OUT EFFECT: 
+       This makes the image disappear smoothly at the bottom
+       so it doesn't touch the "Our Treatments" section. */
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+}
+
+.home-page .info-block {
+    order: 5;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-top: 50px;
+    padding: 60px;
+    width: 100%;
+    background-color: transparent;
+    border-top: 1px solid #e0e6e3;
+}
+
+/* --- UPDATE: MATCHES TAGLINE STYLE NOW --- */
+.info-block p {
+    color: var(--text-muted); /* Changed to Grey */
+    font-size: 1.2rem;        /* Increased Size */
+    font-weight: 400;         /* Lighter weight */
+    margin: 5px 0;
+}
+
+.home-page h3 {
+    display: block;
+    order: 3;
+    font-size: 1.4rem;
+    color: var(--primary-slate);
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.home-page .treatment-gallery {
+    order: 4;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+/* TREATMENT ITEM (Fixes Overlap) */
+.treatment-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px;
+}
+
+.home-page img.gallery-img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid var(--white);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s, border-color 0.3s;
+    margin-bottom: 15px;
+}
+
+.home-page img.gallery-img:hover {
+    transform: scale(1.05);
+    border-color: var(--accent-sage);
+}
+
+.treatment-item p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-slate);
+    margin: 0;
+}
+
+.home-page hr { display: none; }
+
+
+/* =========================================
+   4. DASHBOARD & FORMS
+   ========================================= */
+.content-container:not(.home-page) {
+    background: var(--white);
+    max-width: 900px;
+    width: 90%;
+    margin: 60px auto;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.content-container:not(.home-page)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: var(--accent-sage);
+}
+
+.content-container h2 {
+    color: var(--primary-slate);
+    font-weight: 700;
+}
+
+input, select {
+    width: 100%;
+    padding: 15px;
+    margin: 12px 0;
+    border: 2px solid #eef2f0;
+    border-radius: 10px;
+    background: #fdfdfd;
+    font-family: inherit;
+    transition: all 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent-sage);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(143, 172, 149, 0.1);
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+}
+
+.schedule-table th {
+    background-color: var(--accent-teal); 
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 18px;
+    letter-spacing: 1px;
+}
+
+.schedule-table td {
+    background: var(--white);
+    padding: 18px;
+    border-bottom: 1px solid #f0f0f0;
+    color: var(--text-main);
+}
+
+.schedule-table tr:nth-child(even) td {
+    background-color: #fbfdfc; 
+}
+
+.cta-button, .btn-login, .btn-signup, .btn-next, .btn-confirm, .btn-final-confirm, .btn-home {
+    background-color: var(--primary-slate);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+.cta-button:hover, .btn-next:hover, .btn-confirm:hover {
+    background-color: var(--accent-teal);
+}
+
+.logout-button {
+    color: #e63946;
+    background: rgba(230, 57, 70, 0.05);
+    border: 1px solid rgba(230, 57, 70, 0.2);
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.logout-button:hover {
+    background: #e63946;
+    color: white;
+}
+
+/* =========================================
+   UPDATED: MAKE LINKS LOOK LIKE BUTTONS
+   ========================================= */
+
+/* This targets the "Back" links and "Create Account" links */
+.content-container a, .link-back {
+    display: inline-block;
+    
+    /* SAME COLOR AS BUTTONS */
+     
+    color: var(--primary-slate);
+    
+    /* FIX: Reduced padding to match the visual size of the Login button */
+    
+    
+    /* FIX: Set explicit font size and line-height to prevent "puffiness" */
+    
+    
+    
+    
+}
+
+
+/* =========================================
+   5. FOOTER (Clean & Simple)
+   ========================================= */
+.main-footer {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--btn-gradient);
+    color: var(--white);
+    font-size: 0.85rem;
+    margin-top: auto;
+    
+    /* SYMMETRY FIX: Matching border-top to the Header's top border */
+    /* border-bottom: 6px solid var(--accent-sage); */
+}
+
+.main-footer strong {
+    color: var(--white); /* CHANGE THIS from --primary-slate to --white */
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: Adds readability */
+}
+
+.main-footer hr { display: none; }
+
+/* =========================================
+   NEW: NAVIGATION & RADIO BUTTON FIXES
+   ========================================= */
+
+/* 1. Fix the Radio Buttons alignment */
+/* This stops them from stretching to 100% width */
+input[type="radio"] {
+    width: auto;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.radio-group label {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    text-align: left; /* Ensures text stays left */
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.radio-group label:hover {
+    background-color: #f0f4f1; /* Highlight on hover */
+}
+
+/* 2. Navigation Container (Back Left, Next Right) */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between; /* Pushes items to opposite sides */
+    align-items: center;
+    margin-top: 40px;
+    width: 100%;
+}
+
+/* 3. Arrow Button Styles */
+.btn-arrow {
+    padding: 12px 30px;
+    
+    /* FIX: Force exact font match for both Links and Buttons */
+    font-family: 'Poppins', sans-serif !important; 
+    font-size: 1rem !important;
+    line-height: 1.5 !important; /* Critical for matching height */
+    font-weight: 600;
+    
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    display: inline-flex;
+    justify-content: center; /* Centers text */
+    align-items: center;     /* Centers text vertically */
+    gap: 8px;
+    
+    /* Shape */
+    border-radius: 50px !important;
+    
+    /* Reset browser default button styles */
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* "Next" Style (Filled) */
+.btn-arrow.next {
+    background: var(--btn-gradient);
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(8, 143, 143, 0.3);
+}
+.btn-arrow.next:hover {
+    transform: translateX(5px); /* Moves slightly right */
+    box-shadow: 0 6px 20px rgba(8, 143, 143, 0.4);
+}
+
+/* "Back" Style (Outline) */
+.btn-arrow.back {
+    background: transparent;
+    color: var(--text-muted);
+    border: 2px solid #e0e6e3;
+}
+.btn-arrow.back:hover {
+    border-color: var(--primary-slate);
+    color: var(--primary-slate);
+    transform: translateX(-5px); /* Moves slightly left */
+}
